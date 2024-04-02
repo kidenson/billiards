@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import MovingCanvas from './MovingCanvas';
 
 function Canvas() {

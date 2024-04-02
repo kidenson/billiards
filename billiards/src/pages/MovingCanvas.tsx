@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useRef, useState, Dispatch, SetStateAction } from 'react';
 import generateBalls from '../features/balls/generateballs';
 import update, { stopBalls } from '../features/balls/drawing';
