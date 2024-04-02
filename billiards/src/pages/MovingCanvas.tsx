@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import generateBalls from '../features/balls/generateballs';
 import update, { stopBalls } from '../features/balls/drawing';
 import PickColor from './colorPalette/PickColor';
-import handleMouseMove, { handleClick } from '../mouseEvents';
+import handleMouseMove, { handleClick } from '../shared/mouseEvents';
 
 function MovingCanvas({
   setColorBall,

@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "App.tsx", "vite-env.d.ts"],
+  "include": ["src", "App.tsx", "vite-env.d.ts", "src/main.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

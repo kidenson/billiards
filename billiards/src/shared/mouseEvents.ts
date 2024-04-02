@@ -1,5 +1,5 @@
-import { drawBall, isHovered } from './features/balls/drawing';
-import Ball from './shared/types';
+import { drawBall, isHovered } from '../features/balls/drawing';
+import Ball from './types';
 
 export default function handleMouseMove(
   event: MouseEvent,
