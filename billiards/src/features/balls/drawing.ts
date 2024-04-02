@@ -1,3 +1,4 @@
+import React from 'react';
 import resolveCollision from '../physics/collision';
 import Ball from '../../shared/types';
 
@@ -28,6 +29,17 @@ export function drawBall(
   context.stroke();
 }
 
+interface UpdateProps {
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+  canvasWidth: number;
+  canvasHeight: number;
+  ballsRef: React.MutableRefObject<Ball[]>;
+  mouseXRef: React.MutableRefObject<number>;
+  mouseYRef: React.MutableRefObject<number>;
+  moving: boolean;
+}
+
 export default function update({
   canvas,
   context,
@@ -37,20 +49,11 @@ export default function update({
   mouseXRef,
   mouseYRef,
   moving,
-}: {
-  canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
-  canvasWidth: number;
-  canvasHeight: number;
-  ballsRef: React.MutableRefObject<Ball[]>;
-  mouseXRef: React.MutableRefObject<number>;
-  mouseYRef: React.MutableRefObject<number>;
-  moving: boolean;
-}): void {
+}: UpdateProps): void {
   if (canvas && context) {
     context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    ballsRef.current.forEach((ball, index) => {
+    ballsRef.current.forEach((ball: Ball, index: number) => {
       ball.x += ball.velocity.x;
       ball.y += ball.velocity.y;
       handleMouseCollision({ ball, mouseXRef, mouseYRef, moving });
@@ -118,7 +121,7 @@ export function stopBalls(
   colorBall: string,
   clicked: string
 ) {
-  ballsRef.current.forEach((ball) => {
+  ballsRef.current.forEach((ball: Ball) => {
     ball.velocity.x = 0;
     ball.velocity.y = 0;
     if (ball.id === clicked) {

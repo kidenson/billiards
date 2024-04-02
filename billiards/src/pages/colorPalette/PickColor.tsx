@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import Palette from './Palette';
 import './PickColor.css';
+
+interface PickColorProps {
+  setPalette: Dispatch<SetStateAction<boolean>>;
+  setDot: Dispatch<SetStateAction<boolean>>;
+  setColorBall: Dispatch<SetStateAction<string>>;
+  palTop: number;
+  palLeft: number;
+  setMoving: Dispatch<SetStateAction<boolean>>;
+  palette: boolean;
+}
 
 function PickColor({
   setPalette,
@@ -10,21 +20,17 @@ function PickColor({
   palLeft,
   setMoving,
   palette,
-}: {
-  setPalette: React.Dispatch<React.SetStateAction<boolean>>;
-  setDot: React.Dispatch<React.SetStateAction<boolean>>;
-  setColorBall: React.Dispatch<React.SetStateAction<string>>;
-  palTop: number;
-  palLeft: number;
-  setMoving: React.Dispatch<React.SetStateAction<boolean>>;
-  palette: boolean;
-}) {
-  const [moded, setModed] = useState(false);
+}: PickColorProps) {
+  const [moded, setModed] = useState<boolean>(false);
+
   function pal(): void {
-    setModed((prev) => !prev);
-    setMoving((prev) => !prev);
-    palette && setPalette((prev) => !prev);
+    setModed((prev: boolean) => !prev);
+    setMoving((prev :boolean) => !prev);
+    if (palette) {
+      setPalette((prev:boolean) => !prev);
+    }
   }
+
   return (
     <>
       <div

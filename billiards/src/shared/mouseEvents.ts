@@ -1,3 +1,4 @@
+import React from 'react';
 import { drawBall, isHovered } from '../features/balls/drawing';
 import Ball from './types';
 
@@ -16,13 +17,13 @@ export default function handleMouseMove(
     mouseXRef.current = event.clientX - canvas.getBoundingClientRect().left;
     mouseYRef.current = event.clientY - canvas.getBoundingClientRect().top;
   }
-  ballsRef.current.forEach((ball) => {
+  ballsRef.current.forEach((ball: Ball) => {
     ball.hover = isHovered(ball, mouseXRef.current, mouseYRef.current);
   });
 
   context?.clearRect(0, 0, canvasWidth, canvasHeight);
 
-  ballsRef.current.forEach((ball) => {
+  ballsRef.current.forEach((ball: Ball) => {
     drawBall(context!, ball, moving);
   });
 }
@@ -41,7 +42,7 @@ export function handleClick(
     const clickY = event.clientY - canvas.getBoundingClientRect().top;
     let ballClicked = false;
 
-    ballsRef.current.forEach((ball) => {
+    ballsRef.current.forEach((ball: Ball) => {
       const distanceX = ball.x - clickX;
       const distanceY = ball.y - clickY;
       const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);

@@ -1,30 +1,33 @@
-import { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { useEffect, useRef, useState, Dispatch, SetStateAction } from 'react';
 import generateBalls from '../features/balls/generateballs';
 import update, { stopBalls } from '../features/balls/drawing';
 import PickColor from './colorPalette/PickColor';
 import handleMouseMove, { handleClick } from '../shared/mouseEvents';
+
+interface MovingCanvasProps {
+  setColorBall: Dispatch<SetStateAction<string>>;
+  colorBall: string;
+  palette: boolean;
+  setPalette: Dispatch<SetStateAction<boolean>>;
+}
 
 function MovingCanvas({
   setColorBall,
   colorBall,
   palette,
   setPalette,
-}: {
-  setColorBall: React.Dispatch<React.SetStateAction<string>>;
-  colorBall: string;
-  palette: boolean;
-  setPalette: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+}: MovingCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>();
   const ballsRef = useRef(generateBalls(10));
-  const [moving, setMoving] = useState(true);
-  const mouseXRef = useRef(0);
-  const mouseYRef = useRef(0);
-  const [palTop, setPaltTop] = useState(0);
-  const [palLeft, setPalLeft] = useState(0);
-  const [clicked, setClicked] = useState('');
-  const [dot, setDot] = useState(false);
+  const [moving, setMoving] = useState<boolean>(true);
+  const mouseXRef = useRef<number>(0);
+  const mouseYRef = useRef<number>(0);
+  const [palTop, setPaltTop] = useState<number>(0);
+  const [palLeft, setPalLeft] = useState<number>(0);
+  const [clicked, setClicked] = useState<string>('');
+  const [dot, setDot] = useState<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -100,30 +103,28 @@ function MovingCanvas({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [moving, dot]);
+  }, [moving, dot, colorBall, clicked, setPalette]);
 
   return (
-    <>
-      <div className="commonCont">
-        <div className="canvasCont">
-          <canvas
-            ref={canvasRef}
-            width={800}
-            height={800}
-            style={{ border: '10px solid aliceblue', borderRadius: '50px' }}
-          />
-        </div>
-        <PickColor
-          setPalette={setPalette}
-          setDot={setDot}
-          setColorBall={setColorBall}
-          palTop={palTop}
-          palLeft={palLeft}
-          setMoving={setMoving}
-          palette={palette}
+    <div className="commonCont">
+      <div className="canvasCont">
+        <canvas
+          ref={canvasRef}
+          width={800}
+          height={800}
+          style={{ border: '10px solid aliceblue', borderRadius: '50px' }}
         />
       </div>
-    </>
+      <PickColor
+        setPalette={setPalette}
+        setDot={setDot}
+        setColorBall={setColorBall}
+        palTop={palTop}
+        palLeft={palLeft}
+        setMoving={setMoving}
+        palette={palette}
+      />
+    </div>
   );
 }
 

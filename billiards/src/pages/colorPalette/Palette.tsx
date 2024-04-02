@@ -1,23 +1,26 @@
+import React, { Dispatch, SetStateAction } from 'react';
 import Dot from './Dot';
-import getRandomColors from '../../shared/colors';
+import getRandomColors, { Color } from '../../shared/colors';
+
+interface PaletteProps {
+  setDot: Dispatch<SetStateAction<boolean>>;
+  setColorBall: Dispatch<SetStateAction<string>>;
+  palTop: number;
+  palLeft: number;
+}
 
 function Palette({
   setDot,
   setColorBall,
   palTop,
   palLeft,
-}: {
-  setDot: React.Dispatch<React.SetStateAction<boolean>>;
-  setColorBall: React.Dispatch<React.SetStateAction<string>>;
-  palTop: number;
-  palLeft: number;
-}) {
-  const colors = getRandomColors(5);
+}: PaletteProps) {
+  const colors: Color[] = getRandomColors(5);
   return (
     <div className="paletteContainer" style={{ top: palTop, left: palLeft }}>
       Paint your balls!
       <div>
-        {colors.map((color) => (
+        {colors.map((color: Color) => (
           <Dot
             setDot={setDot}
             setColorBall={setColorBall}

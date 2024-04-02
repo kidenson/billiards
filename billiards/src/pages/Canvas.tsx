@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import MovingCanvas from './MovingCanvas';
 
 function Canvas() {
-  const [palette, setPalette] = useState(false);
+  const [palette, setPalette] = useState<boolean>(false);
+  const [colorBall, setColorBall] = useState<string>('');
 
-  const [colorBall, setColorBall] = useState('');
   return (
     <div className="canvasCont">
       <MovingCanvas

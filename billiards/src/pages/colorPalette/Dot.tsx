@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
+
+interface DotProps {
+  setDot: Dispatch<SetStateAction<boolean>>;
+  setColorBall: Dispatch<SetStateAction<string>>;
+  color: string;
+}
 
 function Dot({
   setDot,
   setColorBall,
   color,
-}: {
-  setDot: React.Dispatch<React.SetStateAction<boolean>>;
-  setColorBall: React.Dispatch<React.SetStateAction<string>>;
-  color: string;
-}) {
+}: DotProps) {
   function handleColor(color: string) {
     setDot(true);
     setColorBall(color);
