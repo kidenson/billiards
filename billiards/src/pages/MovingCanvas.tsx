@@ -93,6 +93,7 @@ function MovingCanvas({
     if (dot && context) {
       stopBalls(ballsRef, context, moving, colorBall, clicked);
       setDot(false);
+      setClicked('')
       setPalette(false);
     }
 
@@ -103,7 +104,7 @@ function MovingCanvas({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [moving, dot, colorBall, clicked, setPalette]);
+  }, [moving, dot, colorBall, setPalette]);
 
   return (
     <div className="commonCont">

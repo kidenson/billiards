@@ -3,6 +3,7 @@ import Dot from './Dot';
 import getRandomColors, { Color } from '../../shared/colors';
 
 interface PaletteProps {
+  setPalette: Dispatch<SetStateAction<boolean>>;
   setDot: Dispatch<SetStateAction<boolean>>;
   setColorBall: Dispatch<SetStateAction<string>>;
   palTop: number;
@@ -10,6 +11,7 @@ interface PaletteProps {
 }
 
 function Palette({
+  setPalette,
   setDot,
   setColorBall,
   palTop,
@@ -22,6 +24,7 @@ function Palette({
       <div>
         {colors.map((color: Color) => (
           <Dot
+          setPalette={setPalette}
             setDot={setDot}
             setColorBall={setColorBall}
             key={color.id}

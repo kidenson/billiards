@@ -29,17 +29,6 @@ export function drawBall(
   context.stroke();
 }
 
-interface UpdateProps {
-  canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
-  canvasWidth: number;
-  canvasHeight: number;
-  ballsRef: React.MutableRefObject<Ball[]>;
-  mouseXRef: React.MutableRefObject<number>;
-  mouseYRef: React.MutableRefObject<number>;
-  moving: boolean;
-}
-
 export default function update({
   canvas,
   context,
@@ -49,7 +38,16 @@ export default function update({
   mouseXRef,
   mouseYRef,
   moving,
-}: UpdateProps): void {
+}: {
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+  canvasWidth: number;
+  canvasHeight: number;
+  ballsRef: React.MutableRefObject<Ball[]>;
+  mouseXRef: React.MutableRefObject<number>;
+  mouseYRef: React.MutableRefObject<number>;
+  moving: boolean;
+}): void {
   if (canvas && context) {
     context.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -125,8 +123,11 @@ export function stopBalls(
     ball.velocity.x = 0;
     ball.velocity.y = 0;
     if (ball.id === clicked) {
-      ball.color = '#' + colorBall;
-      drawBall(context, ball, moving);
+      if (colorBall) { 
+        ball.color = '#' + colorBall;
+        drawBall(context, ball, moving);
+        
+      }
     } else {
       drawBall(context, ball, moving);
     }

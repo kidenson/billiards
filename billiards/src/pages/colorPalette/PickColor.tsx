@@ -25,9 +25,9 @@ function PickColor({
 
   function pal(): void {
     setModed((prev: boolean) => !prev);
-    setMoving((prev :boolean) => !prev);
+    setMoving((prev: boolean) => !prev);
     if (palette) {
-      setPalette((prev:boolean) => !prev);
+      setPalette((prev: boolean) => !prev);
     }
   }
 
@@ -46,6 +46,7 @@ function PickColor({
       </div>
       {palette && (
         <Palette
+          setPalette={setPalette}
           setDot={setDot}
           setColorBall={setColorBall}
           palTop={palTop}
